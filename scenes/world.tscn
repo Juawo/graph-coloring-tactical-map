@@ -4,4 +4,4 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_nnsk1")
-max_connections = 7
+max_connections = 4

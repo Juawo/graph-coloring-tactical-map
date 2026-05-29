@@ -5,6 +5,8 @@ var base_node : PackedScene = preload("res://scenes/base_node.tscn")
 @export var distance_to_click : float = 20.0
 @export var min_edge_distance : float = 100.0
 @export var max_connections : int = 8
+@export var min_distance_between_nodes : float = 40
+@export var max_node : int = 20
 
 var list_base : Array = []
 var graph_data : Dictionary = { }
@@ -17,6 +19,10 @@ func match_click(event : InputEvent) -> void :
 		if event.pressed:
 			match  event.button_index:
 				MOUSE_BUTTON_LEFT:
+					if graph_data.size() >= max_node:
+						return
+					if !verify_min_distance_between_nodes(graph_data, event.position):
+						return
 					var node = base_node.instantiate()
 					node.position = event.position
 					add_child(node)
@@ -40,14 +46,6 @@ func _draw() -> void:
 	for node in graph_data.keys():
 		for neighbor in graph_data[node]:
 			draw_line(node.position, neighbor.position, Color.BLACK, 3)
-			
-	#for i in range(graph_data.size()) :
-		#for j in range(i + 1, graph_data.size()):
-			#var node_a = list_base[i]
-			#var node_b = list_base[j]
-			#
-			#if node_a.position.distance_to(node_b.position) <= min_edge_distance :
-				#draw_line(node_a.position, node_b.position, Color.BLACK, 3)
 
 func connect_nodes(node_list : Array) -> void :
 	graph_data.clear()
@@ -68,3 +66,9 @@ func organize_graph_types() -> void :
 	var graph_calculated = GraphCalculator.calculate_graph_type(graph_data)
 	for node in graph_calculated.keys():
 		node.set_base_type(graph_calculated[node])
+
+func verify_min_distance_between_nodes(node_list : Dictionary, new_position : Vector2) -> bool :
+	for node in node_list.keys() :
+		if node.position.distance_to(new_position) <= min_distance_between_nodes:
+			return false
+	return true
