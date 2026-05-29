@@ -2,6 +2,9 @@ extends Node2D
 
 var base_type : GameEnum.BaseTypes : set = set_base_type
 
+func _ready() -> void:
+	set_base_type(base_type)
+
 func set_base_type(new_value : GameEnum.BaseTypes) -> void :
 	base_type = new_value
 	match new_value :

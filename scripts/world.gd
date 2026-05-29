@@ -4,6 +4,7 @@ var base_node : PackedScene = preload("res://scenes/base_node.tscn")
 
 @export var distance_to_click : float = 20.0
 @export var min_edge_distance : float = 100.0
+@export var max_connections : int = 8
 
 var list_base : Array = []
 var graph_data : Dictionary = { }
@@ -20,20 +21,33 @@ func match_click(event : InputEvent) -> void :
 					node.position = event.position
 					add_child(node)
 					list_base.append(node)
-					queue_redraw()
 					
-				
+					connect_nodes(list_base)
+					organize_graph_types()
+					queue_redraw()
+	
 				MOUSE_BUTTON_RIGHT:
 					for base in list_base :
 						if event.position.distance_to(base.position) < distance_to_click :
 							base.queue_free()
 							list_base.erase(base)
+							connect_nodes(list_base)
+							organize_graph_types()
 							queue_redraw()
 							break
-			organize_graph_types()
 			
 func _draw() -> void:
-	connect_nodes(list_base)
+	for node in graph_data.keys():
+		for neighbor in graph_data[node]:
+			draw_line(node.position, neighbor.position, Color.BLACK, 3)
+			
+	#for i in range(graph_data.size()) :
+		#for j in range(i + 1, graph_data.size()):
+			#var node_a = list_base[i]
+			#var node_b = list_base[j]
+			#
+			#if node_a.position.distance_to(node_b.position) <= min_edge_distance :
+				#draw_line(node_a.position, node_b.position, Color.BLACK, 3)
 
 func connect_nodes(node_list : Array) -> void :
 	graph_data.clear()
@@ -46,9 +60,9 @@ func connect_nodes(node_list : Array) -> void :
 			var node_b = node_list[j]
 			
 			if node_a.position.distance_to(node_b.position) <= min_edge_distance :
-				draw_line(node_a.position, node_b.position, Color.BLACK, 3)
-				graph_data[node_a].append(node_b)
-				graph_data[node_b].append(node_a)
+				if graph_data[node_a].size() < max_connections and graph_data[node_b].size() < max_connections :
+					graph_data[node_a].append(node_b)
+					graph_data[node_b].append(node_a)
 
 func organize_graph_types() -> void :
 	var graph_calculated = GraphCalculator.calculate_graph_type(graph_data)
