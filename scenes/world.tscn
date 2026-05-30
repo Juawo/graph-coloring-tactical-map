@@ -1,7 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://coar0w52ewb50"]
+[gd_scene load_steps=3 format=3 uid="uid://coar0w52ewb50"]
 
 [ext_resource type="Script" uid="uid://cjeagkc5qs2p6" path="res://scripts/world.gd" id="1_nnsk1"]
+[ext_resource type="Texture2D" uid="uid://d0pnx02wqo10b" path="res://assets/background/RoadsideTilingGrass_tile.jpg" id="2_rwgxs"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_nnsk1")
 max_connections = 4
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
+offset_left = -1740.0
+offset_top = -852.0
+offset_right = 997.5405
+offset_bottom = 746.0449
+scale = Vector2(2.0240796, 1.9617721)
+texture = ExtResource("2_rwgxs")
+expand_mode = 3
+stretch_mode = 1
+
+[node name="RoadContainer" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -1735
+limit_top = -833
+limit_right = 3790
+limit_bottom = 2276
+limit_smoothed = true

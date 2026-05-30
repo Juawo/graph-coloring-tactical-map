@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://1d8qyixn5feu"]
+
+[ext_resource type="Texture2D" uid="uid://duxltih6j2bc1" path="res://assets/background/RoadsideTilingRoad.png" id="1_my2y2"]
+[ext_resource type="Script" uid="uid://d3n362lix0yn3" path="res://scripts/road.gd" id="2_my2y2"]
+
+[node name="road" type="Line2D"]
+texture_repeat = 3
+width = 60.0
+texture = ExtResource("1_my2y2")
+texture_mode = 1
+script = ExtResource("2_my2y2")

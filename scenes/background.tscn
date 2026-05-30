@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqrh2yumab0ic"]
+
+[ext_resource type="Shader" uid="uid://3536u5swfiip" path="res://scenes/menu.gdshader" id="1_jougr"]
+[ext_resource type="Texture2D" uid="uid://bryd0j4cq1tv1" path="res://assets/background/RoadsideTilingGrass.jpg" id="2_cbsqf"]
+[ext_resource type="Shader" uid="uid://b21irdxjqssqd" path="res://scenes/blur.gdshader" id="3_wisxt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wax1t"]
+shader = ExtResource("1_jougr")
+shader_parameter/speed = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1tmhi"]
+shader = ExtResource("3_wisxt")
+shader_parameter/sigma = 3.3
+
+[node name="background" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg_image" type="TextureRect" parent="."]
+modulate = Color(0.83137256, 0.83137256, 0.827451, 1)
+material = SubResource("ShaderMaterial_wax1t")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cbsqf")
+expand_mode = 3
+stretch_mode = 1
+
+[node name="bg_blur2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.23392546, 0.23392546, 0.23392543, 0.28627452)
+
+[node name="bg_blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1tmhi")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.23392546, 0.23392546, 0.23392543, 0.28627452)

@@ -1,11 +1,165 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkj1ia4o4gpu8"]
+[gd_scene load_steps=9 format=3 uid="uid://bkj1ia4o4gpu8"]
 
 [ext_resource type="Script" uid="uid://ctfcnkof8msut" path="res://scripts/base_node.gd" id="1_1nni7"]
-[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_mrkbx"]
+[ext_resource type="Texture2D" uid="uid://dooc2cepohqkl" path="res://assets/sprites/heal_base.png" id="2_1nni7"]
+[ext_resource type="Texture2D" uid="uid://b2tcqedyp6dso" path="res://assets/smoke_particle.png" id="3_t3rs4"]
+
+[sub_resource type="Curve" id="Curve_t3rs4"]
+_data = [Vector2(0.18222222, 1), 0.0, 0.0, 0, 0, Vector2(0.99555564, 0.57303375), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_u4t6h"]
+offsets = PackedFloat32Array(0.34170854, 0.99497485)
+colors = PackedColorArray(0.9515795, 0.95157963, 0.9515795, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_1nni7"]
+resource_name = "spawn"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46, 0.56666666, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2.5, 2.5), Vector2(2, 2), Vector2(1.2, 1.2), Vector2(1.6, 1.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shadow:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.02, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(6.0096464, 9.01447), Vector2(1.7052021, 3.4104033)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shadow:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CPUParticles2D:emitting")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_t3rs4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.6, 1.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, 14.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shadow:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4t6h"]
+_data = {
+&"RESET": SubResource("Animation_t3rs4"),
+&"spawn": SubResource("Animation_1nni7")
+}
 
 [node name="BaseNode" type="Node2D"]
+z_index = 3
+scale = Vector2(1.6, 1.6)
 script = ExtResource("1_1nni7")
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.40392157)
+position = Vector2(12, 14.5)
+scale = Vector2(0.29485723, 0.29485723)
+texture = ExtResource("2_1nni7")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+scale = Vector2(0.99999994, 0.99999994)
+emitting = false
+amount = 20
+texture = ExtResource("3_t3rs4")
+lifetime = 0.6
+one_shot = true
+speed_scale = 1.7
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 38.49
+spread = 180.0
+gravity = Vector2(0, -10)
+initial_velocity_max = 200.0
+angle_min = -378.9
+angle_max = 257.7
+scale_amount_min = 0.5
+scale_amount_max = 0.8
+scale_amount_curve = SubResource("Curve_t3rs4")
+color_ramp = SubResource("Gradient_u4t6h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.30492175, 0.30492175)
-texture = ExtResource("1_mrkbx")
+texture = ExtResource("2_1nni7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u4t6h")
+}

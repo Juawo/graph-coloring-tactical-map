@@ -1,0 +1,134 @@
+[gd_scene load_steps=11 format=3 uid="uid://chgpdobu6b1h0"]
+
+[ext_resource type="Script" uid="uid://dh26400k6kedb" path="res://scripts/menu.gd" id="1_i6lef"]
+[ext_resource type="PackedScene" uid="uid://cqrh2yumab0ic" path="res://scenes/background.tscn" id="2_v86rl"]
+[ext_resource type="Texture2D" uid="uid://cwl1honruusfa" path="res://assets/ui/cross_large.png" id="3_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://d10yc0d5yh2dw" path="res://assets/ui/title.png" id="3_mhnvy"]
+[ext_resource type="FontFile" uid="uid://bh0p0tw265165" path="res://assets/ui/fonts/GasoekOne-Regular.ttf" id="5_4ytvr"]
+[ext_resource type="StyleBox" uid="uid://dg22m2jyfbsxh" path="res://assets/button_style.tres" id="6_g3eks"]
+[ext_resource type="FontFile" uid="uid://cmdga1eiugahg" path="res://assets/ui/fonts/PaytoneOne-Regular.ttf" id="8_13sgg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13sgg"]
+bg_color = Color(0.23703709, 0.19320315, 0.14381945, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+shadow_color = Color(0.23340768, 0.1594894, 0.08241085, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3eks"]
+bg_color = Color(0.4773835, 0.4017941, 0.3169237, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+shadow_color = Color(0.40411434, 0.28776872, 0.16679111, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v86rl"]
+bg_color = Color(0.30649528, 0.25274733, 0.19223124, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+shadow_color = Color(0.23340768, 0.1594894, 0.08241085, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 10)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i6lef")
+
+[node name="background" parent="." instance=ExtResource("2_v86rl")]
+layout_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="exit_btn" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("3_4ytvr")
+stretch_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="title_and_play" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="title" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer/title_and_play"]
+layout_mode = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 1.85
+texture = ExtResource("3_mhnvy")
+stretch_mode = 4
+
+[node name="play_btn" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/title_and_play"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+focus_mode = 0
+theme_override_colors/font_color = Color(0.65882355, 0.7137255, 0.3019608, 1)
+theme_override_colors/font_pressed_color = Color(0.45896637, 0.49955982, 0.18605077, 1)
+theme_override_colors/font_hover_color = Color(0.7459392, 0.80534613, 0.37488654, 1)
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = ExtResource("6_g3eks")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_13sgg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g3eks")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_v86rl")
+text = "PLAY"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_font_sizes/font_size = 20
+text = "Assets made by fulano, beltrano e cicrano!"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/exit_btn" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/title_and_play/play_btn" to="." method="_on_play_btn_pressed"]
