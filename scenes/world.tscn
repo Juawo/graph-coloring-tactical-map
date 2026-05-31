@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://coar0w52ewb50"]
+[gd_scene load_steps=6 format=3 uid="uid://coar0w52ewb50"]
 
 [ext_resource type="Script" uid="uid://cjeagkc5qs2p6" path="res://scripts/world.gd" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://d0pnx02wqo10b" path="res://assets/background/RoadsideTilingGrass_tile.jpg" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://yc6023dlvrld" path="res://scenes/totals.tscn" id="3_k0juu"]
 [ext_resource type="PackedScene" uid="uid://cac6fywtayr3w" path="res://scenes/limit_options.tscn" id="4_71j4m"]
+[ext_resource type="PackedScene" uid="uid://cistl6sko7d8b" path="res://scenes/back_to_menu.tscn" id="5_71j4m"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_nnsk1")
@@ -48,3 +49,15 @@ offset_right = 1490.9199
 offset_bottom = 25.319977
 size_flags_horizontal = 8
 size_flags_vertical = 4
+
+[node name="back_to_menu" parent="CanvasLayer" instance=ExtResource("5_71j4m")]
+anchor_left = 0.017
+anchor_top = 0.019000001
+anchor_right = 0.051000003
+anchor_bottom = 0.078
+offset_left = 8.359997
+offset_top = 6.4799995
+offset_right = 43.079994
+offset_bottom = 42.759995
+scale = Vector2(0.7, 0.7)
+icon_alignment = 1

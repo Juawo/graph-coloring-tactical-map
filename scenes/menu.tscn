@@ -161,7 +161,7 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("8_13sgg")
 theme_override_font_sizes/font_size = 20
-text = "Assets made by fulano, beltrano e cicrano!"
+text = "Assets made by : Kenny,  2-Minute Tabletop, Frey Wazza, Dreamstale, Anggara, Muhammad_Usman "
 horizontal_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/exit_btn" to="." method="_on_exit_btn_pressed"]

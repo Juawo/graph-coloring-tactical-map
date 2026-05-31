@@ -7,7 +7,15 @@ var base_type : GameEnum.BaseTypes : set = set_base_type
 func _ready() -> void:
 	set_base_type(base_type)
 	animation_player.play("spawn")
-
+	await animation_player.animation_finished
+	AudioManager.play_vfx(AudioManager.IMPACT_TIN_MEDIUM_002)
+	
+func remove() -> void:
+	animation_player.play("remove")
+	await animation_player.animation_finished
+	AudioManager.play_vfx(AudioManager.BONG_001)
+	queue_free()
+	
 func set_base_type(new_value : GameEnum.BaseTypes) -> void :
 	base_type = new_value
 	match new_value :

@@ -39,7 +39,7 @@ func _on_max_nodes_changed(new_value: int) -> void:
 		var node_para_deletar = list_base.back()
 		
 		# Removemos ele da árvore da Godot
-		node_para_deletar.queue_free()
+		node_para_deletar.remove()
 		# Apagamos a referência dele da nossa lista
 		list_base.erase(node_para_deletar)
 	
@@ -128,15 +128,17 @@ func match_click(event : InputEvent) -> void :
 					connect_nodes(list_base)
 					organize_graph_types()
 					update_ui_totals()
+					AudioManager.play_vfx(AudioManager.CLICK_001)
 					queue_redraw()
 	
 				MOUSE_BUTTON_RIGHT:
 					for base in list_base :
 						if get_global_mouse_position().distance_to(base.position) < distance_to_click :
-							base.queue_free()
+							base.remove()
 							list_base.erase(base)
 							connect_nodes(list_base)
 							organize_graph_types()
+							AudioManager.play_vfx(AudioManager.CLICK_002)
 							queue_redraw()
 							update_ui_totals()
 							break

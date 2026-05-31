@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cistl6sko7d8b"]
+[gd_scene load_steps=6 format=3 uid="uid://cistl6sko7d8b"]
 
 [ext_resource type="Texture2D" uid="uid://jpad5547egda" path="res://assets/ui/home.png" id="1_4eins"]
+[ext_resource type="Script" uid="uid://b5uy2jc28ttyo" path="res://scripts/back_to_menu.gd" id="2_i5hco"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5hco"]
 bg_color = Color(0.49846745, 0.4206073, 0.33323276, 1)
@@ -48,8 +49,9 @@ shadow_offset = Vector2(0, 10)
 anchors_preset = -1
 anchor_right = 0.026
 anchor_bottom = 0.046000004
-offset_right = -17.920002
-offset_bottom = -9.680004
+offset_right = 50.079998
+offset_bottom = 50.319996
+scale = Vector2(0.5, 0.5)
 focus_mode = 0
 theme_override_colors/icon_normal_color = Color(0.65882355, 0.7137255, 0.3019608, 1)
 theme_override_colors/icon_pressed_color = Color(0.49737167, 0.54088116, 0.20590457, 1)
@@ -58,3 +60,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_i5hco")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5nwo8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_p3a0t")
 icon = ExtResource("1_4eins")
+script = ExtResource("2_i5hco")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
