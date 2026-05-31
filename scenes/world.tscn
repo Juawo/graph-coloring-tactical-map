@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://coar0w52ewb50"]
+[gd_scene load_steps=5 format=3 uid="uid://coar0w52ewb50"]
 
 [ext_resource type="Script" uid="uid://cjeagkc5qs2p6" path="res://scripts/world.gd" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://d0pnx02wqo10b" path="res://assets/background/RoadsideTilingGrass_tile.jpg" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://yc6023dlvrld" path="res://scenes/totals.tscn" id="3_k0juu"]
+[ext_resource type="PackedScene" uid="uid://cac6fywtayr3w" path="res://scenes/limit_options.tscn" id="4_71j4m"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_nnsk1")
@@ -21,8 +23,28 @@ stretch_mode = 1
 [node name="RoadContainer" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(963, 535)
 limit_left = -1735
 limit_top = -833
 limit_right = 3790
 limit_bottom = 2276
 limit_smoothed = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="totals" parent="CanvasLayer" instance=ExtResource("3_k0juu")]
+offset_left = 1641.0
+offset_top = 838.0
+offset_right = 1641.84
+offset_bottom = 837.76
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="limit_options" parent="CanvasLayer" instance=ExtResource("4_71j4m")]
+offset_left = 1491.0
+offset_top = 25.0
+offset_right = 1490.9199
+offset_bottom = 25.319977
+size_flags_horizontal = 8
+size_flags_vertical = 4

@@ -11,6 +11,8 @@ var road_scne : PackedScene = preload("res://scenes/road.tscn")
 
 @onready var road_container: Node2D = $RoadContainer
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var limit_options: Control = $CanvasLayer/limit_options
+@onready var totals: Control = $CanvasLayer/totals
 
 var is_dragging_camera : bool
 var is_mouse_clicked : bool = false
@@ -18,7 +20,78 @@ var is_mouse_clicked : bool = false
 var list_base : Array = []
 var graph_data : Dictionary = { }
 
-func _input(event: InputEvent) -> void:
+# No _ready() do seu World.gd, conecte os sinais vindo do CanvasLayer:
+func _ready() -> void:
+	# Exemplo conectando via código apontando para o caminho correto do seu CanvasLayer
+	limit_options.limit_node_changed.connect(_on_max_nodes_changed)
+	limit_options.limit_roads_changed.connect(_on_max_roads_changed)
+	limit_options.limit_min_edge_changed.connect(_on_min_edge_changed)
+	limit_options.limit_min_distance_changed.connect(_on_min_distance_changed)
+	update_ui_totals()
+# Funções que vão receber os dados e recalcular o grafo:
+
+func _on_max_nodes_changed(new_value: int) -> void:
+	max_node = new_value
+	
+	# Enquanto o total de nós na tela for maior que o novo limite do slider...
+	while list_base.size() > max_node:
+		# Pegamos o último nó adicionado (o da ponta da lista)
+		var node_para_deletar = list_base.back()
+		
+		# Removemos ele da árvore da Godot
+		node_para_deletar.queue_free()
+		# Apagamos a referência dele da nossa lista
+		list_base.erase(node_para_deletar)
+	
+	# Depois que o terreno foi limpo, rodamos o recálculo completo do grafo restante
+	recalculate_everything()
+	
+func _on_max_roads_changed(new_value: int) -> void:
+	max_connections = new_value
+	# Mudar o limite de conexões afeta diretamente o grafo! Precisamos recalcular:
+	recalculate_everything()
+
+func _on_min_edge_changed(new_value: int) -> void:
+	min_edge_distance = new_value
+	# Mudar o alcance de conexão afeta diretamente o desenho! Precisamos recalcular:
+	recalculate_everything()
+
+func _on_min_distance_changed(new_value: int) -> void:
+	min_distance_between_nodes = new_value
+	# Mudar a distância mínima entre nós não altera quem já está na tela, 
+	# apenas dita a regra para os próximos cliques de criação.
+
+# Função utilitária para não repetir código
+func recalculate_everything() -> void:
+	connect_nodes(list_base)
+	organize_graph_types()
+	queue_redraw()
+	update_ui_totals() # Próximo passo abaixo
+
+func update_ui_totals() -> void:
+	var total_heal = 0
+	var total_bullet = 0
+	var total_fuel = 0
+	var total_command = 0
+	
+	# Percorremos todas as bases vivas para contar seus tipos atuais
+	for node in list_base:
+		match node.base_type:
+			GameEnum.BaseTypes.HEAL: total_heal += 1
+			GameEnum.BaseTypes.WEAPONS: total_bullet += 1 # Ajuste se o enum for BULLET
+			GameEnum.BaseTypes.FUEL: total_fuel += 1
+			GameEnum.BaseTypes.COMMAND_CENTER: total_command += 1
+			
+	# Enviamos os dados fresquinhos direto para a nossa interface
+	totals.update_totals(
+		list_base.size(), 
+		total_heal, 
+		total_bullet, 
+		total_fuel, 
+		total_command
+	)
+
+func _unhandled_input(event: InputEvent) -> void:
 	match_click(event)
 	if event is InputEventKey:
 		if event.keycode == KEY_SPACE:
@@ -29,14 +102,10 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			# Dá zoom aproximando (aumenta a escala da câmera)
-			# clamp evita que o usuário dê zoom infinito e quebre o visual
 			camera_2d.zoom = clamp(camera_2d.zoom + Vector2(0.1, 0.1), Vector2(0.5, 0.5), Vector2(2.0, 2.0))
 			
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			# Dá zoom afastando (diminui a escala da câmera)
 			camera_2d.zoom = clamp(camera_2d.zoom - Vector2(0.1, 0.1), Vector2(0.5, 0.5), Vector2(2.0, 2.0))
-
 
 func match_click(event : InputEvent) -> void :
 	if event is InputEventMouseButton :
@@ -58,6 +127,7 @@ func match_click(event : InputEvent) -> void :
 					
 					connect_nodes(list_base)
 					organize_graph_types()
+					update_ui_totals()
 					queue_redraw()
 	
 				MOUSE_BUTTON_RIGHT:
@@ -68,6 +138,7 @@ func match_click(event : InputEvent) -> void :
 							connect_nodes(list_base)
 							organize_graph_types()
 							queue_redraw()
+							update_ui_totals()
 							break
 
 func _draw() -> void:

@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://cistl6sko7d8b"]
+
+[ext_resource type="Texture2D" uid="uid://jpad5547egda" path="res://assets/ui/home.png" id="1_4eins"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5hco"]
+bg_color = Color(0.49846745, 0.4206073, 0.33323276, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0.3137255, 0.21960784, 0.12156863, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nwo8"]
+bg_color = Color(0.3495088, 0.28740403, 0.22178677, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0.3137255, 0.21960784, 0.12156863, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3a0t"]
+bg_color = Color(0.5134858, 0.4307805, 0.34368154, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0.41323242, 0.2946869, 0.17145014, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 10)
+
+[node name="back_to_menu" type="Button"]
+anchors_preset = -1
+anchor_right = 0.026
+anchor_bottom = 0.046000004
+offset_right = -17.920002
+offset_bottom = -9.680004
+focus_mode = 0
+theme_override_colors/icon_normal_color = Color(0.65882355, 0.7137255, 0.3019608, 1)
+theme_override_colors/icon_pressed_color = Color(0.49737167, 0.54088116, 0.20590457, 1)
+theme_override_colors/icon_hover_color = Color(0.7086905, 0.7664601, 0.3402581, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_i5hco")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5nwo8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_p3a0t")
+icon = ExtResource("1_4eins")

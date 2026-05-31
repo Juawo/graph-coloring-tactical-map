@@ -1,0 +1,313 @@
+[gd_scene load_steps=12 format=3 uid="uid://cac6fywtayr3w"]
+
+[ext_resource type="FontFile" uid="uid://cmdga1eiugahg" path="res://assets/ui/fonts/PaytoneOne-Regular.ttf" id="1_oh4g8"]
+[ext_resource type="Script" uid="uid://dko8d2t3hxcup" path="res://scripts/limit_options.gd" id="1_t5ruw"]
+[ext_resource type="StyleBox" uid="uid://cxn8f5ateesf" path="res://assets/foldable_style.tres" id="3_6sq2i"]
+[ext_resource type="StyleBox" uid="uid://vhlncufj5me" path="res://assets/option_style.tres" id="3_ggepe"]
+[ext_resource type="StyleBox" uid="uid://cu04rcm6xvjut" path="res://assets/slider_style.tres" id="4_84sd0"]
+[ext_resource type="StyleBox" uid="uid://bqeuo2wvbamo" path="res://assets/slider_fill.tres" id="4_ggepe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sq2i"]
+bg_color = Color(0.5090568, 0.427416, 0.33731776, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gaye"]
+bg_color = Color(0.5090568, 0.427416, 0.33731776, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0.3137255, 0.21960784, 0.12156863, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pihyq"]
+bg_color = Color(0.5090568, 0.427416, 0.33731776, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 20.0
+shadow_color = Color(0.3137255, 0.21960784, 0.12156863, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6vcf"]
+bg_color = Color(0.5090568, 0.427416, 0.33731776, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 20.0
+shadow_color = Color(0.3137255, 0.21960784, 0.12156863, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="Theme" id="Theme_84sd0"]
+VScrollBar/styles/grabber = ExtResource("4_ggepe")
+
+[node name="limit_options" type="Control"]
+layout_mode = 3
+anchor_right = 0.19900002
+anchor_bottom = 0.22100002
+offset_left = 237.0
+offset_top = 124.0
+offset_right = 236.91998
+offset_bottom = 124.31998
+grow_horizontal = 2
+script = ExtResource("1_t5ruw")
+
+[node name="FoldableContainer" type="FoldableContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.929
+offset_bottom = -0.03100586
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/title_panel = SubResource("StyleBoxFlat_6sq2i")
+theme_override_styles/title_hover_panel = SubResource("StyleBoxFlat_1gaye")
+theme_override_styles/title_collapsed_panel = SubResource("StyleBoxFlat_pihyq")
+theme_override_styles/title_collapsed_hover_panel = SubResource("StyleBoxFlat_p6vcf")
+theme_override_styles/panel = ExtResource("3_6sq2i")
+title = "Limit Options"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FoldableContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme = SubResource("Theme_84sd0")
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="FoldableContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+
+[node name="total_node_limit" type="PanelContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_ggepe")
+
+[node name="MarginContainer" type="MarginContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/total_node_limit"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/total_node_limit/MarginContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = -6
+
+[node name="total_node_limit_label" type="Label" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/total_node_limit/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+text = "Total Node limit"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/total_node_limit/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 10
+
+[node name="total_node_slider" type="HSlider" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/total_node_limit/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/slider = ExtResource("4_84sd0")
+theme_override_styles/grabber_area = ExtResource("4_ggepe")
+theme_override_styles/grabber_area_highlight = ExtResource("4_ggepe")
+min_value = 1.0
+max_value = 300.0
+value = 60.0
+rounded = true
+scrollable = false
+
+[node name="total_node_value" type="Label" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/total_node_limit/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(29, 0)
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+text = "20"
+
+[node name="max_roads_limit" type="PanelContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_ggepe")
+
+[node name="MarginContainer" type="MarginContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/max_roads_limit"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/max_roads_limit/MarginContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = -6
+
+[node name="max_roads_label" type="Label" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/max_roads_limit/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+text = "Max roads limit"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/max_roads_limit/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 10
+
+[node name="max_roads_slider" type="HSlider" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/max_roads_limit/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/slider = ExtResource("4_84sd0")
+theme_override_styles/grabber_area = ExtResource("4_ggepe")
+theme_override_styles/grabber_area_highlight = ExtResource("4_ggepe")
+max_value = 10.0
+value = 4.0
+scrollable = false
+
+[node name="max_roads_value" type="Label" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/max_roads_limit/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(29, 0)
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+text = "4"
+
+[node name="min_distance_node" type="PanelContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_ggepe")
+
+[node name="MarginContainer" type="MarginContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_distance_node"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_distance_node/MarginContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = -6
+
+[node name="min_distance_label" type="Label" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_distance_node/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+text = "Min distance between nodes"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_distance_node/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 10
+
+[node name="min_distance_slider" type="HSlider" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_distance_node/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/slider = ExtResource("4_84sd0")
+theme_override_styles/grabber_area = ExtResource("4_ggepe")
+theme_override_styles/grabber_area_highlight = ExtResource("4_ggepe")
+min_value = 80.0
+max_value = 200.0
+value = 80.0
+scrollable = false
+
+[node name="min_distance_value" type="Label" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_distance_node/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(29, 0)
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+text = "80"
+
+[node name="min_edge_distance" type="PanelContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_ggepe")
+
+[node name="MarginContainer" type="MarginContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_edge_distance"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_edge_distance/MarginContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = -6
+
+[node name="min_edge_label" type="Label" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_edge_distance/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+text = "Min edge distance"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_edge_distance/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 10
+
+[node name="min_edge_slider" type="HSlider" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_edge_distance/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+focus_mode = 0
+theme_override_styles/slider = ExtResource("4_84sd0")
+theme_override_styles/grabber_area = ExtResource("4_ggepe")
+theme_override_styles/grabber_area_highlight = ExtResource("4_ggepe")
+min_value = 180.0
+max_value = 600.0
+value = 180.0
+scrollable = false
+
+[node name="min_edge_value" type="Label" parent="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_edge_distance/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(29, 0)
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_oh4g8")
+text = "value"
+
+[connection signal="value_changed" from="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/total_node_limit/MarginContainer/VBoxContainer/HBoxContainer/total_node_slider" to="." method="_on_total_node_slider_value_changed"]
+[connection signal="value_changed" from="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/max_roads_limit/MarginContainer/VBoxContainer/HBoxContainer/max_roads_slider" to="." method="_on_max_roads_slider_value_changed"]
+[connection signal="value_changed" from="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_distance_node/MarginContainer/VBoxContainer/HBoxContainer/min_distance_slider" to="." method="_on_min_distance_slider_value_changed"]
+[connection signal="value_changed" from="FoldableContainer/ScrollContainer/MarginContainer/VBoxContainer/min_edge_distance/MarginContainer/VBoxContainer/HBoxContainer/min_edge_slider" to="." method="_on_min_edge_slider_value_changed"]
