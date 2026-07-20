@@ -204,7 +204,7 @@ Não é necessário compilar o projeto para jogar! Você pode baixar a versão f
     Bash
     
     ```
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    git clone https://github.com/Juawo/graph-coloring-tactical-map
     ```
     
 2. Abra a **Godot Engine 4+**.
